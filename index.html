@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anghel Portfolio - Senku</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f5ff;
+            --neon-purple: #8a2be2;
+            --neon-green: #39ff14;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a2e;
+            --text-light: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #16213e 50%, var(--card-bg) 100%);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue);
+        }
+
+        .neon-border {
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue), inset 0 0 10px var(--neon-blue);
+        }
+
+        .game-card {
+            background: rgba(26, 26, 46, 0.9);
+            border: 1px solid var(--neon-purple);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-green));
+            z-index: -1;
+            border-radius: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .game-card:hover::before {
+            opacity: 1;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 245, 255, 0.3);
+        }
+
+        .profile-img {
+        width: 300px;
+    	height: 300px;
+    	object-fit: cover; /* ensures the image doesn't stretch */
+    	border-radius: 50%; /* makes it a perfect circle */
+    	border: 4px solid var(--neon-blue);
+    	box-shadow: 0 0 30px var(--neon-blue);
+ 	   transition: all 0.3s ease;
+		}
+
+
+        .profile-img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px var(--neon-green);
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--neon-blue) !important;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .btn-gamer {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            border: none;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 30px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+        }
+
+        .btn-gamer:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 245, 255, 0.6);
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));
+        }
+
+        .progress-gamer {
+            height: 25px;
+            background: var(--dark-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--neon-blue);
+        }
+
+        .progress-bar-gamer {
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue), var(--neon-green));
+            height: 100%;
+            border-radius: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 5px var(--neon-blue); }
+            50% { box-shadow: 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue); }
+        }
+
+        .floating-icons {
+            position: fixed;
+            font-size: 2rem;
+            color: var(--neon-blue);
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7));
+            position: relative;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-badge:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 245, 255, 0.5);
+        }
+
+        .accordion-gamer .accordion-item {
+            background: var(--card-bg);
+            border: 1px solid var(--neon-purple);
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+
+        .accordion-gamer .accordion-button {
+            background: var(--card-bg);
+            color: var(--text-light);
+            border: none;
+            font-weight: 600;
+        }
+
+        .accordion-gamer .accordion-button:not(.collapsed) {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            color: white;
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        .carousel-gamer .carousel-item img {
+            border-radius: 15px;
+            border: 2px solid var(--neon-blue);
+        }
+
+        .toast-gamer {
+            background: var(--card-bg);
+            border: 1px solid var(--neon-green);
+            color: var(--text-light);
+        }
+
+        .form-control-gamer {
+            background: var(--card-bg);
+            border: 1px solid var(--neon-blue);
+            color: var(--text-light);
+            border-radius: 10px;
+        }
+
+        .form-control-gamer:focus {
+            background: var(--card-bg);
+            border-color: var(--neon-green);
+            color: var(--text-light);
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .modal-gamer .modal-content {
+            background: var(--card-bg);
+            border: 2px solid var(--neon-blue);
+            border-radius: 15px;
+        }
+
+        .modal-gamer .modal-header {
+            border-bottom: 1px solid var(--neon-purple);
+        }
+
+        .modal-gamer .modal-title {
+            color: var(--neon-blue);
+            font-family: 'Orbitron', monospace;
+        }
+
+        .tab-gamer .nav-tabs {
+            border-bottom: 2px solid var(--neon-blue);
+        }
+
+        .tab-gamer .nav-link {
+            background: var(--card-bg);
+            border: 1px solid var(--neon-purple);
+            color: var(--text-light);
+            margin-right: 5px;
+        }
+
+        .tab-gamer .nav-link.active {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            border-color: var(--neon-blue);
+            color: white;
+        }
+
+        .badge-gamer {
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));
+            color: white;
+            font-weight: 600;
+        }
+
+        .alert-gamer {
+            background: rgba(26, 26, 46, 0.9);
+            border: 1px solid var(--neon-green);
+            color: var(--text-light);
+            border-radius: 10px;
+        }
+
+        .list-group-gamer .list-group-item {
+            background: var(--card-bg);
+            border: 1px solid var(--neon-purple);
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .list-group-gamer .list-group-item:hover {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            transform: translateX(10px);
+        }
+
+        .dropdown-gamer .dropdown-menu {
+            background: var(--card-bg);
+            border: 1px solid var(--neon-blue);
+        }
+
+        .dropdown-gamer .dropdown-item {
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-gamer .dropdown-item:hover {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            color: white;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin: 50px 0 30px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-counter {
+            font-size: 3rem;
+            font-weight: 900;
+            font-family: 'Orbitron', monospace;
+            color: var(--neon-green);
+            text-shadow: 0 0 20px var(--neon-green);
+        }
+
+        .spinner-gamer {
+            border: 4px solid var(--card-bg);
+            border-top: 4px solid var(--neon-blue);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .offcanvas-gamer {
+            background: var(--card-bg);
+            border-left: 2px solid var(--neon-blue);
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Icons -->
+    <div class="floating-icons" style="top: 10%; left: 5%;"><i class="bi bi-controller"></i></div>
+    <div class="floating-icons" style="top: 20%; right: 10%; animation-delay: 1s;"><i class="bi bi-trophy"></i></div>
+    <div class="floating-icons" style="top: 60%; left: 8%; animation-delay: 2s;"><i class="bi bi-joystick"></i></div>
+    <div class="floating-icons" style="top: 80%; right: 15%; animation-delay: 3s;"><i class="bi bi-puzzle"></i></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(26, 26, 46, 0.95); backdrop-filter: blur(10px);">
+        <div class="container">
+            <a class="navbar-brand glow-text" href="#" style="font-family: 'Orbitron', monospace; font-weight: 900;">
+                <i class="bi bi-controller me-2"></i>SENKU GAMING
+            </a>
+            
+            <!-- Offcanvas Toggle Button -->
+            <button class="btn btn-gamer d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#gameMenu">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#profile">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#hobbies">Hobbies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#family">Family</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#favorites">Favorites</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sports">Sports</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#feedback">Feedback</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas offcanvas-end offcanvas-gamer" tabindex="-1" id="gameMenu">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title glow-text" style="font-family: 'Orbitron', monospace;">Game Menu</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav">
+                <li class="nav-item mb-3"><a class="nav-link" href="#profile" data-bs-dismiss="offcanvas">Profile</a></li>
+                <li class="nav-item mb-3"><a class="nav-link" href="#hobbies" data-bs-dismiss="offcanvas">Hobbies</a></li>
+                <li class="nav-item mb-3"><a class="nav-link" href="#family" data-bs-dismiss="offcanvas">Family</a></li>
+                <li class="nav-item mb-3"><a class="nav-link" href="#favorites" data-bs-dismiss="offcanvas">Favorites</a></li>
+                <li class="nav-item mb-3"><a class="nav-link" href="#sports" data-bs-dismiss="offcanvas">Sports</a></li>
+                <li class="nav-item mb-3"><a class="nav-link" href="#feedback" data-bs-dismiss="offcanvas">Feedback</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="profile" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-center text-lg-start">
+                    <h1 class="display-3 glow-text mb-4" style="font-family: 'Orbitron', monospace; font-weight: 900;">
+                        ANGHEL EUSEBIO
+                    </h1>
+                    <p class="lead mb-4" style="font-size: 1.5rem;">Student • Gamer • Developer</p>
+                    
+                    <!-- Breadcrumb -->
+                    <nav aria-label="breadcrumb" class="mb-4">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" style="color: var(--neon-blue);">Home</a></li>
+                            <li class="breadcrumb-item active" style="color: var(--text-light);">Profile</li>
+                        </ol>
+                    </nav>
+                    
+                    <!-- Progress Bars for Skills -->
+                    <div class="mb-4">
+                        <h5 class="mb-3">Gaming Skills</h5>
+                        <div class="mb-3">
+                            <label class="form-label">MOBA Games</label>
+                            <div class="progress-gamer">
+                                <div class="progress-bar-gamer" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">FPS Games</label>
+                            <div class="progress-gamer">
+                                <div class="progress-bar-gamer" style="width: 88%;"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">RTS Games</label>
+                            <div class="progress-gamer">
+                                <div class="progress-bar-gamer" style="width: 92%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="d-flex flex-wrap gap-3 mb-4">
+                        <button class="btn btn-gamer" data-bs-toggle="modal" data-bs-target="#achievementsModal">
+                            <i class="bi bi-trophy me-2"></i>Achievements
+                        </button>
+                        <button class="btn btn-gamer" id="playSound">
+                            <i class="bi bi-volume-up me-2"></i>Sound On
+                        </button>
+                        <div class="dropdown dropdown-gamer">
+                            <button class="btn btn-gamer dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-gear me-2"></i>Settings
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-palette me-2"></i>Theme</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-volume-up me-2"></i>Audio</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-controller me-2"></i>Controls</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 text-center">
+                    <div class="position-relative">
+                        <img src="aq2.png" alt="Professional gaming setup with RGB lighting, multiple monitors showing game interfaces, mechanical keyboard, and gaming headset on a modern desk" class="profile-img img-fluid mb-4" />
+
+                        <!-- Status Badge -->
+                        <span class="badge badge-gamer position-absolute" style="top: 10px; right: 10px; font-size: 1rem;">
+                            <i class="bi bi-circle-fill text-success me-1"></i>Online
+                        </span>
+                    </div>
+                    
+                    <!-- Stats Cards -->
+                    <div class="row mt-4">
+                        <div class="col-4">
+                            <div class="game-card text-center">
+                                <div class="stats-counter">250</div>
+                                <small>Games Played</small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="game-card text-center">
+                                <div class="stats-counter">87%</div>
+                                <small>Win Rate</small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="game-card text-center">
+                                <div class="stats-counter">42</div>
+                                <small>Achievements</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alert Banner -->
+    <div class="container mt-5">
+        <div class="alert alert-gamer alert-dismissible fade show" role="alert">
+            <i class="bi bi-lightning-fill me-2"></i>
+            <strong>New Achievement Unlocked!</strong> You've reached Level 25 in Strategy Gaming!
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+
+    <!-- Hobbies Section -->
+    <section id="hobbies" class="py-5">
+        <div class="container">
+            <h2 class="section-title">HOBBIES & INTERESTS</h2>
+            
+            <!-- Tab Navigation -->
+            <div class="tab-gamer">
+                <ul class="nav nav-tabs justify-content-center mb-4" id="hobbiesTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="gaming-tab" data-bs-toggle="tab" data-bs-target="#gaming" type="button">
+                            <i class="bi bi-controller me-2"></i>Gaming
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="coding-tab" data-bs-toggle="tab" data-bs-target="#coding" type="button">
+                            <i class="bi bi-code-slash me-2"></i>Coding
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="music-tab" data-bs-toggle="tab" data-bs-target="#music" type="button">
+                            <i class="bi bi-sign-stop me-2"></i>Motorcycle
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="hobbiesTabContent">
+                    <div class="tab-pane fade show active" id="gaming" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="game-card">
+                                    <h5><i class="bi bi-trophy me-2"></i>Competitive Gaming</h5>
+                                    <p>Specializing in RTS games, FPS, and MOBAs tournaments. Currently Top Metro-Politant Player.</p>
+                                    <div class="mt-3">
+                                        <span class="skill-badge">Mobile Legends</span>
+                                        <span class="skill-badge">Call of Duty: Mobile</span>
+                                        <span class="skill-badge">Clash of Clans</span>
+                                        <span class="skill-badge">Honor Of Kings</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="game-card">
+                                    <h5><i class="bi bi-people me-2"></i>Game Streaming</h5>
+                                    <p>Live streaming gameplay sessions and tutorials. Building a community of fellow gamers and sharing strategies.</p>
+                                    <div class="mt-3">
+                                        <button class="btn btn-sm btn-gamer me-2">
+                                            <i class="bi bi-tiktok"></i> TikTok
+                                        </button>
+                                        <button class="btn btn-sm btn-gamer">
+                                            <i class="bi bi-facebook"></i> Facebook
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="coding" role="tabpanel">
+                        <div class="game-card">
+                            <h5><i class="bi bi-code-slash me-2"></i>Programming & Development</h5>
+                            <p>Student with basic knowledge of programming, interested in learning more about creating simple games and websites.</p>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <div class="list-group list-group-gamer">
+                                        <div class="list-group-item">
+                                            <strong>Languages:</strong>  HTML, CSS, JavaScript, PHP, C++ (beginner)
+                                        </div>
+                                        <div class="list-group-item">
+                                            <strong>Frameworks:</strong> React
+                                        </div>
+                                        <div class="list-group-item">
+                                            <strong>Tools:</strong> VS Code, Git, AwardSpace
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6506b8f9-88fc-4779-88b4-5f3f90475ad3.png" alt="Modern coding workspace with dual monitors displaying colorful code, mechanical keyboard, and multiple programming language stickers" class="img-fluid rounded neon-border" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="music" role="tabpanel">
+                        <div class="game-card">
+                         <i class="bi bi-sign-stop me-2"></i> Motorcycle
+                            <p>Creating electronic music and game soundtracks. Love experimenting with synthesizers and digital audio workstations.</p>
+                            <div class="row mt-4">
+                                <div class="col-md-8">
+                                    <div class="accordion accordion-gamer" id="musicAccordion">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#genres">
+                                                    Favorite Genres
+                                                </button>
+                                            </h2>
+                                            <div id="genres" class="accordion-collapse collapse show" data-bs-parent="#musicAccordion">
+                                                <div class="accordion-body">
+                                                    <span class="skill-badge">Sportsbike</span>
+                                                    <span class="skill-badge">Scooter</span>
+                                                    <span class="skill-badge">Cafe Racer</span>
+                                                    <span class="skill-badge">Scrambler</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#software">
+                                                    Owned
+                                                </button>
+                                            </h2>
+                                            <div id="software" class="accordion-collapse collapse" data-bs-parent="#musicAccordion">
+                                                <div class="accordion-body" style="color: white;">
+                                                    HONDA CBR 150R, YAMAHA AEROX 155
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="bike.jpg" alt="Professional music production studio with synthesizers, audio interface, studio monitors, and colorful LED ambient lighting" class="img-fluid rounded neon-border" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Family Section -->
+    <section id="family" class="py-5">
+        <div class="container">
+            <h2 class="section-title">FAMILY MEMBERS</h2>
+            
+            <!-- Carousel for Family Members -->
+            <div id="familyCarousel" class="carousel slide carousel-gamer" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#familyCarousel" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#familyCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#familyCarousel" data-bs-slide-to="2"></button>
+                </div>
+                
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <img src="fam.png" alt="Professional family portrait with parents and siblings in formal attire, warm lighting in modern living room setting" class="d-block w-100" />
+                            </div>
+                            <div class="col-md-6">
+                                <div class="game-card">
+                                    <h3>The Eusebio Family</h3>
+                                    <p class="lead">Meet my amazing family who supports my gaming passion and academic pursuits.</p>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="text-center">
+                                                <div class="stats-counter">7</div>
+                                                <small>Family Members</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="text-center">
+                                                <div class="stats-counter">3</div>
+                                                <small>Fellow Gamers</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <img src="mama.png" alt="Father working at computer desk with gaming setup, wearing casual shirt, focused on screen with coding environment visible" class="d-block w-100" />
+                            </div>
+                            <div class="col-md-6">
+                                <div class="game-card">
+                                   <h3>Mother - Teresita Cuneta</h3>
+									<p>A single mother who raised us siblings with unwavering love, strength, and resilience. Despite the challenges of raising us alone, she always put our needs first and worked tirelessly to ensure we had everything we needed. Her compassion and dedication shaped who we are today, instilling in us values of hard work, kindness, and perseverance. Through her sacrifices, she taught us the importance of family, love, and never giving up, no matter the circumstances.</p>
+                                    <div class="mt-3">
+                                        <span class="skill-badge">Cooking</span>
+                                        <span class="skill-badge">Massage therapy</span>
+                                        <span class="skill-badge">herbalist</span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <small class="">
+                                            <i class="bi bi-briefcase me-1"></i>Homemaker
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <img src="tinog.png" alt="Mother in modern kitchen preparing healthy meal, wearing apron, bright natural lighting, fresh ingredients visible on counter" class="d-block w-100" />
+                            </div>
+                            <div class="col-md-6">
+                                <div class="game-card">
+                                    <h3>Older Brother - Ace Eusebio</h3>
+									<p>A hardworking and dedicated brother who consistently goes above and beyond to support me. As a skilled graphic designer, he not only helps with creative projects but also plays a key role in designing my streaming setup. His commitment to excellence and tireless effort to ensure everything is in place makes him an invaluable part of my journey. Always reliable, Ace sets a strong example of hard work and determination.</p>
+                                    <div class="mt-3">
+                                        <span class="skill-badge">CSR</span>
+                                        <span class="skill-badge">Cooking</span>
+                                        <span class="skill-badge">Billiards</span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <small class="">
+                                            <i class="bi bi-palette me-1"></i>Customer Service Representative
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="carousel-control-prev" type="button" data-bs-target="#familyCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#familyCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+            
+            <!-- Family Stats Cards -->
+            <div class="row mt-5">
+                <div class="col-md-3">
+                    <div class="game-card text-center">
+                        <i class="bi bi-person-circle" style="font-size: 3rem; color: var(--neon-blue);"></i>
+                        <h5 class="mt-3">Ma. Evangeline (Older Sister)</h5>
+                        <p>Age 36 • Assistant Nurse</p>
+                        <span class="skill-badge">Travels</span>
+                        <span class="skill-badge">Photography</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="game-card text-center">
+                        <i class="bi bi-person-circle" style="font-size: 3rem; color: var(--neon-green);"></i>
+                        <h5 class="mt-3">Juan Cuneta(Older Brother)</h5>
+                        <p>Age 27 • CSR </p>
+                        <span class="skill-badge">Dota Player</span>
+                        <span class="skill-badge">Rider</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="game-card text-center">
+                        <i class="bi bi-house-heart" style="font-size: 3rem; color: var(--neon-purple);"></i>
+                        <h5 class="mt-3">Family Gaming</h5>
+                        <p>Weekly Game Nights</p>
+                        <span class="skill-badge">Mobas Games</span>
+                        <span class="skill-badge">FPS Games</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="game-card text-center">
+                        <i class="bi bi-geo-alt" style="font-size: 3rem; color: var(--neon-blue);"></i>
+                        <h5 class="mt-3">Home Base</h5>
+                        <p>Tunasan, Munt. City</p>
+                        <span class="skill-badge">Happy Fam</span>
+                        <span class="skill-badge">Gaming Culture</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Favorites Section -->
+    <section id="favorites" class="py-5">
+        <div class="container">
+            <h2 class="section-title">FAVORITES</h2>
+            
+            <div class="row">
+                <!-- Games Column -->
+                <div class="col-lg-4">
+                    <div class="game-card h-100">
+                        <h4><i class="bi bi-controller me-2"></i>Favorite Games</h4>
+                        
+                        <!-- List Group with Badges -->
+                        <div class="list-group list-group-gamer mt-3">
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                Mobile Legends BangBang
+                                <span class="badge badge-gamer">MOBA</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                Call of Duty: Mobile
+                                <span class="badge badge-gamer">FPS</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                Pokemen
+                                <span class="badge badge-gamer">RPG</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                GTA V
+                                <span class="badge badge-gamer">Action</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                Clash of Clans
+                                <span class="badge badge-gamer">RTS</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Rating System -->
+                        <div class="mt-4">
+                            <h6>Current Playing:</h6>
+                            <div class="d-flex align-items-center">
+                                <span class="me-2">Call of Duty: Mobile</span>
+                                <div class="text-warning">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                </div>
+                                <span class="ms-2 small">(4.5/5)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tech & Gear Column -->
+                <div class="col-lg-4">
+                    <div class="game-card h-100">
+                        <h4><i class="bi bi-gear me-2"></i>Gaming Devices</h4>
+                        
+                        <div class="mt-3">
+                            <img src="device.png" alt="High-end gaming battlestation with RGB mechanical keyboard, gaming mouse, multiple monitors, LED strips, and custom gaming PC with tempered glass panel" class="img-fluid rounded neon-border mb-3" />
+                        </div>
+                        
+                        <!-- Specifications -->
+                        <div class="accordion accordion-gamer" id="setupAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pc-specs">
+                                        <i class="bi bi-pc-display me-2"></i>PC Specifications: ASUS Vivobook 15 S
+                                    </button>
+                                </h2>
+                                <div id="pc-specs" class="accordion-collapse collapse show">
+                                    <div class="accordion-body" style="color: white;">
+                                        <ul class="list-unstyled">
+                                            <li><strong>CPU:</strong> AMD Ryzen 7 5700U</li>
+                                            <li><strong>GPU:</strong> Integrated GPU</li>
+                                            <li><strong>RAM:</strong> 16GB DDR4 3600MHz</li>
+                                            <li><strong>Storage:</strong> 1TB NVMe SSD</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#peripherals">
+                                        <i class="bi bi-phone me-2"></i>Phone Model: IPhone 12 PRO
+                                    </button>
+                                </h2>
+                                <div id="peripherals" class="accordion-collapse collapse">
+                                    <div class="accordion-body" style="color: white;">
+                                        <ul class="list-unstyled">
+                                            <li><strong>Chipset:</strong> Apple A14 Bionic</li>
+                                            <li><strong>Connectity:</strong> 5G Data and 5GHz </li>
+                                            <li><strong>Display:</strong> Super Retina XDR</li>
+                                            <li><strong>Camera:</strong> 12MP Triple-Lens Camera</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Miscellaneous Column -->
+                <div class="col-lg-4">
+                    <div class="game-card h-100">
+                        <h4><i class="bi bi-heart me-2"></i>Other Favorites</h4>
+                        
+                        <!-- Button Group -->
+                        <div class="btn-group-vertical w-100 mt-3" role="group">
+                            <button type="button" class="btn btn-gamer text-start" data-bs-toggle="tooltip" title="Pizza with extra cheese and pepperoni">
+                                <i class="bi bi-emoji-smile me-2"></i>Food: Pizza
+                            </button>
+                            <button type="button" class="btn btn-gamer text-start" data-bs-toggle="tooltip" title="Science fiction and fantasy genres">
+                                <i class="bi bi-tv me-2"></i>Series: Anime
+                            </button>
+                            <button type="button" class="btn btn-gamer text-start" data-bs-toggle="tooltip" title="Marvel Cinematic Universe and action movies">
+                                <i class="bi bi-film me-2"></i>Movies: MCU
+                            </button>
+                            <button type="button" class="btn btn-gamer text-start" data-bs-toggle="tooltip" title="Electronic, synthwave, and game soundtracks">
+                                <i class="bi bi-music-note me-2"></i>Music: OPM
+                            </button>
+                        </div>
+                        
+                        <!-- Color Preferences -->
+                        <div class="mt-4">
+                            <h6>Color Palette:</h6>
+                            <div class="d-flex gap-2 mt-2">
+                                <div class="rounded-circle" style="width: 30px; height: 30px; background: var(--neon-blue); border: 2px solid white;"></div>
+                                <div class="rounded-circle" style="width: 30px; height: 30px; background: var(--neon-purple); border: 2px solid white;"></div>
+                                <div class="rounded-circle" style="width: 30px; height: 30px; background: var(--neon-green); border: 2px solid white;"></div>
+                                <div class="rounded-circle" style="width: 30px; height: 30px; background: #ff0080; border: 2px solid white;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Spinner Loading Demo -->
+                        <div class="mt-4 text-center">
+                            <h6>Loading Favorite Content...</h6>
+                            <div class="spinner-gamer mx-auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sports Section -->
+    <section id="sports" class="py-5">
+        <div class="container">
+            <h2 class="section-title">SPORTS & FITNESS</h2>
+            
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Sports Cards -->
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="game-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="bi bi-sign-stop me-2" style="font-size: 2.5rem; color: var(--neon-blue);"></i>
+                                    <div class="ms-3">
+                                        <h5 class="mb-1">Riding</h5>
+                                        <small class="">City & Nature Trips </small>
+                                    </div>
+                                </div>
+                                <p>Love exploring trails and staying fit between gaming sessions. Weekend rides help clear my mind and maintain physical health. I enjoy both city and nature trips on my bike, using these rides to unwind and connect with the outdoors.</p>
+                                
+                                <!-- Progress for cycling stats -->
+                                <div class="mt-3">
+                                    <small class="">Monthly Distance</small>
+                                    <div class="progress-gamer mt-1">
+                                        <div class="progress-bar-gamer" style="width: 75%;"></div>
+                                    </div>
+                                    <small class="">Goal: 100km/month</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="game-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="bi-person-fill" style="font-size: 2.5rem; color: var(--neon-green);"></i>
+                                    <div class="ms-3">
+                                        <h5 class="mb-1">GYM</h5>
+                                        <small class="">Fitness and Health</small>
+                                    </div>
+                                </div>
+                                <p>Going to the gym helps improve strength, endurance, and overall fitness. It’s a great way to build muscle, lose weight, and enhance mental health. Stay consistent with your routine and challenge yourself by setting new fitness goals or participating in local fitness events and competitions.</p>
+                                
+                                <div class="mt-3">
+                                    <small class="">Personal Best (10reps, 4 set)</small>
+                                    <div class="stats-counter" style="font-size: 1.5rem;">150lbs</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Activity Timeline -->
+                    <div class="game-card">
+                        <h5><i class="bi bi-calendar-week me-2"></i>Weekly Activity Schedule</h5>
+                        
+                        <div class="table-responsive mt-3">
+                            <table class="table table-dark table-striped">
+                                <thead>
+                                    <tr style="color: var(--neon-blue);">
+                                        <th>Day</th>
+                                        <th>Morning</th>
+                                        <th>Afternoon</th>
+                                        <th>Evening</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Monday</strong></td>
+                                        <td>Classes</td>
+                                        <td>Classes</td>
+                                        <td>Gaming</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Tuesday</strong></td>
+                                        <td>Gaming</td>
+                                        <td>Study</td>
+                                        <td>Classes</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Friday</strong></td>
+                                        <td>Gaming</td>
+                                        <td>Classes</td>
+                                        <td>Projects</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Saturday</strong></td>
+                                        <td>Rides</td>
+                                        <td>Family Time</td>
+                                        <td>Gaming</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <!-- Fitness Stats -->
+                    <div class="game-card mb-4">
+                        <h5><i class="bi bi-graph-up me-2"></i>Fitness Stats</h5>
+                        
+                        <div class="mt-3">
+                            <div class="row text-center">
+                                <div class="col-6 mb-3">
+                                    <div class="stats-counter" style="font-size: 2rem;">5126</div>
+                                    <small>Steps Today</small>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="stats-counter" style="font-size: 2rem;">850</div>
+                                    <small>Calories Burned</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="stats-counter" style="font-size: 2rem;">7.5h</div>
+                                    <small>Sleep Last Night</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="stats-counter" style="font-size: 2rem;">85</div>
+                                    <small>Avg Heart Rate</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Fitness Goals -->
+                        <div class="mt-4">
+                            <h6>Monthly Goals</h6>
+                            <div class="mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <small>Ride Distance</small>
+                                    <small>150/200 km</small>
+                                </div>
+                                <div class="progress-gamer">
+                                    <div class="progress-bar-gamer" style="width: 75%;"></div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <small>GYM Sessions</small>
+                                    <small>16/20 sessions</small>
+                                </div>
+                                <div class="progress-gamer">
+                                    <div class="progress-bar-gamer" style="width: 78%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sports Image -->
+                    <div class="game-card text-center">
+                        <img src="gala.jpg" alt="Athletic person on mountain bike with helmet and sports gear, overlooking scenic mountain trail with forest background and dramatic sunset lighting" class="img-fluid rounded neon-border" />
+                        <h6 class="mt-3">Latest Rides</h6>
+                        <p class="small">Over The Top, Angono Rizal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section id="feedback" class="py-5">
+        <div class="container">
+            <h2 class="section-title">FEEDBACK & CONTACT</h2>
+            
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Feedback Form -->
+                    <div class="game-card">
+                        <h4><i class="bi bi-chat-dots me-2"></i>Send Feedback</h4>
+                        <p class="">Got suggestions? Want to collaborate? Let me know!</p>
+                        
+                        <form id="feedbackForm" class="mt-4">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control form-control-gamer" id="name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control form-control-gamer" id="email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Category</label>
+                                <select class="form-select form-control-gamer" id="category" required>
+                                    <option value="">Choose...</option>
+                                    <option value="gaming">Gaming Collaboration</option>
+                                    <option value="coding">Coding Project</option>
+                                    <option value="general">General Feedback</option>
+                                    <option value="question">Question</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="priority" class="form-label">Priority Level</label>
+                                <div class="btn-group w-100" role="group" aria-label="Priority">
+                                    <input type="radio" class="btn-check" name="priority" id="low" value="low" autocomplete="off">
+                                    <label class="btn btn-outline-info" for="low">Low</label>
+                                    
+                                    <input type="radio" class="btn-check" name="priority" id="medium" value="medium" autocomplete="off" checked>
+                                    <label class="btn btn-outline-warning" for="medium">Medium</label>
+                                    
+                                    <input type="radio" class="btn-check" name="priority" id="high" value="high" autocomplete="off">
+                                    <label class="btn btn-outline-danger" for="high">High</label>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control form-control-gamer" id="message" rows="5" placeholder="Tell me about your idea, feedback, or question..." required></textarea>
+                            </div>
+                            
+                            <!-- File Upload -->
+                            <div class="mb-3">
+                                <label for="attachment" class="form-label">Attachment (optional)</label>
+                                <input class="form-control form-control-gamer" type="file" id="attachment">
+                            </div>
+                            
+                            <!-- Checkbox -->
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="newsletter">
+                                <label class="form-check-label" for="newsletter">
+                                    Subscribe to gaming updates and project announcements
+                                </label>
+                            </div>
+                            
+                            <div class="d-flex gap-3">
+                                <button type="submit" class="btn btn-gamer">
+                                    <i class="bi bi-send me-2"></i>Send Message
+                                </button>
+                                <button type="reset" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-clockwise me-2"></i>Reset
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <!-- Contact Info -->
+                    <div class="game-card mb-4">
+                        <h5><i class="bi bi-person-lines-fill me-2"></i>Contact Information</h5>
+                        
+                        <div class="mt-3">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-envelope" style="color: var(--neon-blue); font-size: 1.2rem;"></i>
+                                <div class="ms-3">
+                                    <small class="">Email</small>
+                                    <div>eusebioanghel123@gmail.com</div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-discord" style="color: var(--neon-purple); font-size: 1.2rem;"></i>
+                                <div class="ms-3">
+                                    <small class="">Discord</small>
+                                    <div>Senku_01648282</div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-tiktok" style="color: var(--neon-green); font-size: 1.2rem;"></i>
+                                <div class="ms-3">
+                                    <small class="">Tiktok</small>
+                                    <div>@julkisan</div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-github" style="color: var(--text-light); font-size: 1.2rem;"></i>
+                                <div class="ms-3">
+                                    <small class="">GitHub</small>
+                                    <div>github.com/julki-san</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Stats -->
+                    <div class="game-card mb-4">
+                        <h5><i class="bi bi-graph-up me-2"></i>Response Stats</h5>
+                        
+                        <div class="row text-center mt-3">
+                            <div class="col-6">
+                                <div class="stats-counter" style="font-size: 1.8rem;">24h</div>
+                                <small>Avg Response Time</small>
+                            </div>
+                            <div class="col-6">
+                                <div class="stats-counter" style="font-size: 1.8rem;">98%</div>
+                                <small>Response Rate</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="game-card text-center">
+                        <h5><i class="bi bi-share me-2"></i>Connect With Me</h5>
+                        
+                        <div class="d-flex justify-content-center gap-3 mt-3">
+                            <button class="btn btn-gamer btn-sm" data-bs-toggle="tooltip" title="Follow on tiktok">
+                                <i class="bi bi-tiktok"></i>
+                            </button>
+                            <button class="btn btn-gamer btn-sm" data-bs-toggle="tooltip" title="Subscribe on YouTube">
+                                <i class="bi bi-youtube"></i>
+                            </button>
+                            <button class="btn btn-gamer btn-sm" data-bs-toggle="tooltip" title="Connect on Discord">
+                                <i class="bi bi-discord"></i>
+                            </button>
+                            <button class="btn btn-gamer btn-sm" data-bs-toggle="tooltip" title="Follow on GitHub">
+                                <i class="bi bi-github"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="successToast" class="toast toast-gamer" role="alert">
+            <div class="toast-header">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                <strong class="me-auto">Success!</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+                Your message has been sent successfully!
+            </div>
+        </div>
+    </div>
+
+    <!-- Achievements Modal -->
+    <div class="modal fade modal-gamer" id="achievementsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">
+                        <i class="bi bi-trophy me-2"></i>Gaming Achievements
+                    </h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center p-3" style="background: rgba(0, 245, 255, 0.1); border-left: 4px solid var(--neon-blue); border-radius: 8px;">
+                                <i class="bi bi-star-fill" style="font-size: 2rem; color: gold;"></i>
+                                <div class="ms-3">
+                                    <h6 class="mb-1">Master Strategist</h6>
+                                    <small class="">Reached Diamond rank in 3 different strategy games</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center p-3" style="background: rgba(138, 43, 226, 0.1); border-left: 4px solid var(--neon-purple); border-radius: 8px;">
+                                <i class="bi bi-lightning-fill" style="font-size: 2rem; color: var(--neon-purple);"></i>
+                                <div class="ms-3">
+                                    <h6 class="mb-1">Speed Runner</h6>
+                                    <small class="">Completed 5 games in record time</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center p-3" style="background: rgba(57, 255, 20, 0.1); border-left: 4px solid var(--neon-green); border-radius: 8px;">
+                                <i class="bi bi-people-fill" style="font-size: 2rem; color: var(--neon-green);"></i>
+                                <div class="ms-3">
+                                    <h6 class="mb-1">Team Player</h6>
+                                    <small class="">Won 100 team-based matches</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center p-3" style="background: rgba(255, 0, 128, 0.1); border-left: 4px solid #ff0080; border-radius: 8px;">
+                                <i class="bi bi-heart-fill" style="font-size: 2rem; color: #ff0080;"></i>
+                                <div class="ms-3">
+                                    <h6 class="mb-1">Dedicated Gamer</h6>
+                                    <small class="">1000+ hours of gameplay logged</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-gamer" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-4" style="background: var(--card-bg); border-top: 1px solid var(--neon-blue);">
+        <div class="container text-center">
+    <p class="mb-2">© 2025 Anghel Eusebio. Built with passion for gaming and technology.</p>
+    <p class="small text-white">
+        <i class="bi bi-code-slash me-1"></i>Coded with HTML, CSS, Bootstrap & JavaScript
+        <span class="mx-2 text-white">|</span>
+        <i class="bi bi-heart-fill text-danger me-1"></i>Made for gamers by a Senku
+    </p>
+</div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Initialize tooltips
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+        // Sound effect function
+        document.getElementById('playSound').addEventListener('click', function() {
+            const button = this;
+            if (button.textContent.includes('Sound On')) {
+                button.innerHTML = '<i class="bi bi-volume-mute me-2"></i>Sound Off';
+                button.classList.add('btn-secondary');
+                button.classList.remove('btn-gamer');
+            } else {
+                button.innerHTML = '<i class="bi bi-volume-up me-2"></i>Sound On';
+                button.classList.add('btn-gamer');
+                button.classList.remove('btn-secondary');
+            }
+        });
+
+        // Form submission with toast
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple validation
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (name && email && message) {
+                // Show success toast
+                const toast = new bootstrap.Toast(document.getElementById('successToast'));
+                toast.show();
+                
+                // Reset form after a delay
+                setTimeout(() => {
+                    this.reset();
+                }, 2000);
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate counters on scroll
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stats-counter');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent.replace(/[^\d]/g, ''));
+                const increment = target / 100;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    
+                    // Format the number back with any special characters
+                    const originalText = counter.textContent;
+                    if (originalText.includes('%')) {
+                        counter.textContent = Math.floor(current) + '%';
+                    } else if (originalText.includes('k')) {
+                        counter.textContent = Math.floor(current / 1000) + 'k';
+                    } else if (originalText.includes('h')) {
+                        counter.textContent = (current / 10).toFixed(1) + 'h';
+                    } else if (originalText.includes('s')) {
+                        counter.textContent = (current / 10).toFixed(1) + 's';
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
+                }, 50);
+            });
+        }
+
+        // Trigger counter animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        // Observe the first stats section
+        const firstStatsSection = document.querySelector('.stats-counter');
+        if (firstStatsSection) {
+            observer.observe(firstStatsSection.closest('section'));
+        }
+
+        // Add parallax effect to floating icons
+        window.addEventListener('scroll', () => {
+            const icons = document.querySelectorAll('.floating-icons');
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            icons.forEach(icon => {
+                icon.style.transform = `translateY(${rate}px)`;
+            });
+        });
+
+        // Add keyboard navigation for accessibility
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                // Add focus styles for better accessibility
+                document.body.classList.add('keyboard-navigation');
+            }
+        });
+
+        document.addEventListener('click', () => {
+            document.body.classList.remove('keyboard-navigation');
+        });
+
+        // Dynamic greeting based on time
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            const greetings = {
+                morning: "Good Morning, Gamer!",
+                afternoon: "Good Afternoon, Player!",
+                evening: "Good Evening, Champion!",
+                night: "Late Night Gaming Session?"
+            };
+            
+            let greeting;
+            if (hour < 12) greeting = greetings.morning;
+            else if (hour < 17) greeting = greetings.afternoon;
+            else if (hour < 22) greeting = greetings.evening;
+            else greeting = greetings.night;
+            
+            // You could update a greeting element if you add one
+            console.log(greeting);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateGreeting();
+            
+            // Add some entrance animations
+            const cards = document.querySelectorAll('.game-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Add click effects to buttons
+        document.querySelectorAll('.btn-gamer').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add the ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            
+            .keyboard-navigation *:focus {
+                outline: 2px solid var(--neon-blue) !important;
+                outline-offset: 2px;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+
+```
